@@ -17,10 +17,14 @@ jobs:
     - uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
-        java-version: 11
+        java-version: 17
     - uses: actions/setup-node@v3
       with:
-        node-version: 19
+        node-version: 20
     - run: npm install -g cordova
     - run: cordova prepare
-    - run: cordova build
+#    - run: cordova build ios
+    - run: cordova build android
+    - run: cordova build android --release -- --packageType=apk
+    - run: du -h platforms/android/app/build/outputs/apk/debug/app-debug.apk
+    - run: du -h platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
