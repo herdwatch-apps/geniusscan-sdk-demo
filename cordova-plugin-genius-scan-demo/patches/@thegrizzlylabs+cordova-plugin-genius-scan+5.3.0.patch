@@ -1,0 +1,14 @@
+diff --git a/node_modules/@thegrizzlylabs/cordova-plugin-genius-scan/src/android/build.gradle b/node_modules/@thegrizzlylabs/cordova-plugin-genius-scan/src/android/build.gradle
+index f6cb95b..70eb1b2 100644
+--- a/node_modules/@thegrizzlylabs/cordova-plugin-genius-scan/src/android/build.gradle
++++ b/node_modules/@thegrizzlylabs/cordova-plugin-genius-scan/src/android/build.gradle
+@@ -9,3 +9,9 @@ allprojects {
+      }
+    }
+ }
++
++ext.postBuildExtras = {
++    android {
++        ndkVersion = '26.2.11394342';
++    }
++}
