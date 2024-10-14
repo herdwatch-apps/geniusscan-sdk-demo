@@ -4,7 +4,7 @@ name: Xamarin
 on:
   push:
     branches:
-      - '**'
+      - master
 
 jobs:
   android:

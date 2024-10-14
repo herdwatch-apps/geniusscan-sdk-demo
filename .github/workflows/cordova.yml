@@ -4,7 +4,7 @@ name: Cordova
 on:
   push:
     branches:
-      - '**'
+      - upload-dsym
 
 jobs:
   build:

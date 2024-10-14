@@ -4,7 +4,7 @@ name: DotNetMaui
 on:
   push:
     branches:
-      - '**'
+      - master
 
 jobs:
   build:
