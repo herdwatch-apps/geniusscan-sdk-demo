@@ -13,14 +13,11 @@ jobs:
       run:
         working-directory: cordova-plugin-genius-scan-demo
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
-      with:
-        distribution: 'zulu'
-        java-version: 11
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 19
-    - run: npm install -g cordova
-    - run: cordova prepare
-    - run: cordova build
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g cordova
+      - run: npm i
+      - run: cordova prepare
+      - run: cordova build ios
