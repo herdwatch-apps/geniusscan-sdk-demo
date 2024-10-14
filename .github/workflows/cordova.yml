@@ -17,7 +17,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Retrieve the secret and decode it to a file
+        env:
+          APPLE_API_KEY_CONTENT_BASE64: ${{ secrets.APPLE_API_KEY_CONTENT }}
+        run: |
+          echo APPLE_API_KEY_CONTENT_BASE64 | base64 --decode > AuthKey.p8
       - run: npm install -g cordova
       - run: npm i
-      - run: cordova prepare
-      - run: cordova build ios
+      - run: cordova platform add ios
+      - run: | 
+          cordova build ios \
+          --device \
+          --release \
+          --buildFlag="-UseModernBuildSystem=0"
+          -- \
+          --developmentTeam="${{secrets.APPLE_DEVELOPMENT_TEAM}}" \
+          --codeSignIdentity="iPhone Distribution" 
+          --iCloudContainerEnvironment="Production"
+          --packageType="app-store"
+          --automaticProvisioning=true
+          --authenticationKeyPath="${{ github.workspace }}/AuthKey.p8" \
+          --authenticationKeyID="${{ secrets.APPLE_API_KEY_ID }}" \
+          --authenticationKeyIssuerID="${{ secrets.APPLE_API_KEY_ISSUER_ID }}" \
+          /
